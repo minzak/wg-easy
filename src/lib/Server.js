@@ -51,7 +51,7 @@ module.exports = class Server {
         return UI_TRAFFIC_STATS === 'true';
       })))
 
-    // Authentication
+      // Authentication
       .get('/api/session', Util.promisify(async (req) => {
         const requiresPassword = !!process.env.PASSWORD;
         const authenticated = requiresPassword
@@ -82,7 +82,7 @@ module.exports = class Server {
         debug(`New Session: ${req.session.id}`);
       }))
 
-    // WireGuard
+      // WireGuard
       .use((req, res, next) => {
         if (!PASSWORD) {
           return next();
@@ -112,11 +112,28 @@ module.exports = class Server {
 
         debug(`Deleted Session: ${sessionId}`);
       }))
-       .get('/api/wireguard/config', Util.promisify(async req =>{
-         let config;
+      .get('/api/wireguard/config', Util.promisify(async req => {
+        try {
+          let config;
           config = await fs.readFile(path.join(WG_PATH, 'wg0.json'), 'utf8');
           config = JSON.parse(config);
           return config
+        } catch {
+          console.log('no')
+          return 'error'
+        }
+      }))
+      .post('/api/wireguard/config', Util.promisify(async req => {
+        try {
+          let config = req.body;
+          console.log(config)
+          await fs.writeFile(path.join(WG_PATH, 'wg0.json'), JSON.stringify(config, false, 2), {
+            mode: 0o660,
+          });
+          process.exit(0);
+        } catch {
+          return "error"
+        }
       }))
       .get('/api/wireguard/client', Util.promisify(async (req) => {
         return WireGuard.getClients();

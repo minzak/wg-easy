@@ -4,10 +4,11 @@ FROM docker.io/library/node:18-alpine AS build_node_modules
 COPY src/ /app/
 WORKDIR /app
 RUN npm ci --production
+RUN npm install bcryptjs 
 
 # Copy build result to a new image.
 # This saves a lot of disk space.
-FROM docker.io/library/node:18-alpine
+FROM docker.io/library/node:20-alpine
 COPY --from=build_node_modules /app /app
 
 # Move node_modules one directory up, so during development
@@ -23,7 +24,7 @@ RUN mv /app/node_modules /node_modules
 RUN apk add -U --no-cache \
   iptables \
   wireguard-tools \
-  dumb-init
+  dumb-init 
 
 # Expose Ports
 EXPOSE 51820/udp
