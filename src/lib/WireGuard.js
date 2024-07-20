@@ -42,7 +42,7 @@ async resetClientTraffic({ clientId }) {
 
   await this.saveConfig();
 
-  debug(Traffic for client ${clientId} has been reset.);
+  debug(`Traffic for client ${clientId} has been reset.`);
 }
   async getConfig() {
     if (!this.__configPromise) {
