@@ -195,7 +195,14 @@ module.exports = class Server {
         const { address } = req.body;
         return WireGuard.updateClientAddress({ clientId, address });
       }))
-
+      .post('/api/wireguard/client/:clientId/reset-traffic', Util.promisify(async (req, res) => {
+        const { clientId } = req.params;
+        if (clientId === '__proto__'  clientId === 'constructor'  clientId === 'prototype') {
+          res.end(403);
+        }
+        await WireGuard.resetClientTraffic({ clientId });
+        res.status(200).send({ message: 'Traffic reset successfully.' });
+      }))
       .listen(PORT, WEBUI_HOST, () => {
         debug(`Listening on http://${WEBUI_HOST}:${PORT}`);
       });
