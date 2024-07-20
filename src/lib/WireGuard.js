@@ -31,7 +31,7 @@ async resetClientTraffic({ clientId }) {
   const client = config.clients[clientId];
 
   if (!client) {
-    throw new ServerError(Client Not Found: ${clientId}, 404);
+    throw new ServerError(`Client Not Found: ${clientId}`, 404);
   }
 
   // Reset traffic values
