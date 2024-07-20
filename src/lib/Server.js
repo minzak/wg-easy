@@ -197,7 +197,7 @@ module.exports = class Server {
       }))
       .post('/api/wireguard/client/:clientId/reset-traffic', Util.promisify(async (req, res) => {
         const { clientId } = req.params;
-        if (clientId === '__proto__'  clientId === 'constructor'  clientId === 'prototype') {
+        if (clientId === '__proto__' || clientId === 'constructor' || clientId === 'prototype') {
           res.end(403);
         }
         await WireGuard.resetClientTraffic({ clientId });
