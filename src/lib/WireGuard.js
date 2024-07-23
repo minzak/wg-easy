@@ -27,20 +27,13 @@ const {
 
 module.exports = class WireGuard {
 async resetClientTraffic({ clientId }) {
-  const config = await this.getConfig();
-  const client = config.clients[clientId];
-
-  if (!client) {
-    throw new ServerError(`Client Not Found: ${clientId}`, 404);
-  }
-
-  // Reset traffic values
-  client.transferRx = 0;
-  client.transferTx = 0;
-
-  client.updatedAt = new Date();
-
-  await this.saveConfig();
+  const client = await this.getClient({ clientId });
+  
+  for ( const enable of [false, true]){
+    client.enabled = Boolean(enable);
+    client.updatedAt = new Date();
+    await this.saveConfig();
+  };
 
   debug(`Traffic for client ${clientId} has been reset.`);
 }
