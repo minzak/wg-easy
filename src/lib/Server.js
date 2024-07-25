@@ -16,7 +16,7 @@ const WireGuard = require('../services/WireGuard');
 const {
   WG_PATH,
   PORT,
-  WG_HOST,
+  WEBUI_HOST,
   RELEASE,
   PASSWORD,
   LANG,
@@ -203,8 +203,8 @@ module.exports = class Server {
         await WireGuard.resetClientTraffic({ clientId });
         res.status(200).send({ message: 'Traffic reset successfully.' });
       }))
-      .listen(PORT, WG_HOST, () => {
-        debug(`Listening on http://${WG_HOST}:${PORT}`);
+      .listen(PORT, WEBUI_HOST, () => {
+        debug(`Listening on http://${WEBUI_HOST}:${PORT}`);
       });
   }
 
