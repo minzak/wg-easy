@@ -23,8 +23,8 @@ services:
     volumes:
       - .:/etc/wireguard
     ports:
-      - "51820:51820/udp"
-      - "51821:51821/tcp"
+      - "443:443/udp"
+      - "51824:51824/tcp"
     restart: unless-stopped
     cap_add:
       - NET_ADMIN
