@@ -78,7 +78,7 @@ async resetClientTraffic({ clientId }) {
           throw err;
         });
         // await Util.exec(`iptables -t nat -A POSTROUTING -s ${WG_DEFAULT_ADDRESS.replace('x', '0')}/24 -o eth0 -j MASQUERADE`);
-        // await Util.exec('iptables -A INPUT -p udp -m udp --dport 51820 -j ACCEPT');
+        // await Util.exec('iptables -A INPUT -p udp -m udp --dport 443 -j ACCEPT');
         // await Util.exec('iptables -A FORWARD -i wg0 -j ACCEPT');
         // await Util.exec('iptables -A FORWARD -o wg0 -j ACCEPT');
         await this.__syncConfig();
@@ -105,7 +105,7 @@ async resetClientTraffic({ clientId }) {
 [Interface]
 PrivateKey = ${config.server.privateKey}
 Address = ${config.server.address}/24
-ListenPort = 51820
+ListenPort = 443
 PreUp = ${WG_PRE_UP}
 PostUp = ${WG_POST_UP}
 PreDown = ${WG_PRE_DOWN}
