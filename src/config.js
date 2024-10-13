@@ -3,12 +3,12 @@
 const { release } = require('./package.json');
 
 module.exports.RELEASE = release;
-module.exports.PORT = process.env.PORT || 51825;
+module.exports.PORT = process.env.PORT || 51824;
 module.exports.PASSWORD = process.env.PASSWORD;
 module.exports.WG_PATH = process.env.WG_PATH || '/etc/wireguard/';
 module.exports.WG_DEVICE = process.env.WG_DEVICE || 'eth0';
 module.exports.WG_HOST = process.env.WG_HOST || '0.0.0.0';
-module.exports.WG_PORT = process.env.WG_PORT || 40823;
+module.exports.WG_PORT = process.env.WG_PORT || 443;
 module.exports.WG_MTU = process.env.WG_MTU || null;
 module.exports.WG_PERSISTENT_KEEPALIVE = process.env.WG_PERSISTENT_KEEPALIVE || 0;
 module.exports.WG_DEFAULT_ADDRESS = process.env.WG_DEFAULT_ADDRESS || '10.8.0.x';
