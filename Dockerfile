@@ -27,7 +27,7 @@ RUN apk add -U --no-cache \
   dumb-init 
 
 # Expose Ports
-EXPOSE 443/udp
+EXPOSE 80/udp
 EXPOSE 51824/tcp
 
 # Set Environment
