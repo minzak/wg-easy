@@ -105,7 +105,7 @@ async resetClientTraffic({ clientId }) {
 [Interface]
 PrivateKey = ${config.server.privateKey}
 Address = ${config.server.address}/24
-ListenPort = ${config.WG_HOST}
+ListenPort = ${WG_HOST}
 PreUp = ${WG_PRE_UP}
 PostUp = ${WG_POST_UP}
 PreDown = ${WG_PRE_DOWN}
